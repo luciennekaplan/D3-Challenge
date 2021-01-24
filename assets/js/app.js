@@ -1,6 +1,6 @@
 // Define SVG area dimensions
-var svgWidth = 960;
-var svgHeight = 660;
+var svgWidth = 800;
+var svgHeight = 600;
 
 //Define chart margins as an object
 var chartMargin = {
@@ -34,20 +34,17 @@ healthData.forEach(function(d) {
   });
 
 
-// Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
-var xScale = d3.scaleBand()
-    .domain(healthData.map(d => d.poverty))
+// Configure a band scale for the horizontal axis
+var xScale = d3.scaleLinear()
+    .domain([8, d3.max(healthData, d => d.poverty)])
     .range([0, chartWidth])
-    .padding(0.1);
 
 // Create a linear scale for the vertical axis.
-// remember that the range goes form chartHeight to 0!
 var yScale = d3.scaleLinear()
     .domain([0, d3.max(healthData, d => d.healthcare)])
     .range([chartHeight, 0]);
 
 // Create two new functions passing our scales in as arguments
-// These will be used to create the chart's axes
 var bottomAxis = d3.axisBottom(xScale);
 var leftAxis = d3.axisLeft(yScale);
 
@@ -66,6 +63,6 @@ chartGroup.selectAll("circle")
     .append("circle")
     .attr("cx", d => xScale(d.poverty))
     .attr("cy", d => yScale(d.healthcare))
-    .attr("r", "1.5")
+    .attr("r", "7")
     .style("fill", "green");
 });
