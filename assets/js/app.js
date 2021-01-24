@@ -15,14 +15,14 @@ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
 //Select HTML area for chart, append SVG to it, set dimensions
-var svg = d3.select("scatter")
+var svg = d3.select("#scatter")
   .append("svg")
   .attr("height", svgHeight)
   .attr("width", svgWidth);
 
-// Append chart group to SVG area, translate down & to the right
+// Append chart group to SVG area, translate down & to the left
 var chartGroup = svg.append("g")
-  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+  .attr("transform", `translate(${chartMargin.right}, ${chartMargin.top})`);
 
 // Access CSV
 d3.csv("assets/data/data.csv").then(function(healthData) {
@@ -31,8 +31,6 @@ d3.csv("assets/data/data.csv").then(function(healthData) {
 healthData.forEach(function(d) {
     d.poverty = +d.poverty;
     d.healthcare = +d.healthcare;
-    console.log(d.poverty);
-    console.log(d.healthcare);
   });
 
 
@@ -51,7 +49,7 @@ var yScale = d3.scaleLinear()
 // Create two new functions passing our scales in as arguments
 // These will be used to create the chart's axes
 var bottomAxis = d3.axisBottom(xScale);
-var leftAxis = d3.axisLeft(yScale).ticks(10);
+var leftAxis = d3.axisLeft(yScale);
 
 // Append two SVG group elements to the chartGroup area,
 // and create the bottom and left axes inside of them
@@ -62,4 +60,12 @@ chartGroup.append("g")
     .attr("transform", `translate(0, ${chartHeight})`)
     .call(bottomAxis);
 
+chartGroup.selectAll("circle")
+    .data(healthData)
+    .enter()
+    .append("circle")
+    .attr("cx", d => xScale(d.poverty))
+    .attr("cy", d => yScale(d.healthcare))
+    .attr("r", "1.5")
+    .style("fill", "green");
 });
