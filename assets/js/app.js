@@ -22,7 +22,7 @@ var svg = d3.select("#scatter")
 
 // Append chart group to SVG area, translate down & to the left
 var chartGroup = svg.append("g")
-  .attr("transform", `translate(${chartMargin.right}, ${chartMargin.top})`);
+    .attr("transform", `translate(${chartMargin.right}, ${chartMargin.top})`);
 
 // Access CSV
 d3.csv("assets/data/data.csv").then(function (healthData) {
@@ -64,7 +64,8 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .attr("cx", d => xScale(d.poverty))
         .attr("cy", d => yScale(d.healthcare))
         .attr("r", "8")
-        .style("fill", "lightblue");
+        .style("fill", "lightblue")
+        .attr("opacity", "0.5");
 
     chartGroup.append("text")
         .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top + 10})`)
