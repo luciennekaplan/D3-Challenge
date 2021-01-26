@@ -57,15 +57,31 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .attr("transform", `translate(0, ${chartHeight})`)
         .call(bottomAxis);
 
-    chartGroup.selectAll("circle")
+    var circlesGroup = chartGroup.selectAll("circle")
         .data(healthData)
-        .enter()
-        .append("circle")
+        .enter();
+
+    circlesGroup.append("circle")
         .attr("cx", d => xScale(d.poverty))
         .attr("cy", d => yScale(d.healthcare))
         .attr("r", "8")
         .style("fill", "lightblue")
-        .attr("opacity", "0.5");
+        .attr("opacity", "0.5")
+        .attr("class", function (d) {
+            return d.abbr;
+        });
+    
+    circlesGroup.append("text")
+        .text(function (d) {
+            return d.abbr;
+        })
+        .attr("dx", function (d) {
+            return xScale(d.poverty) -5
+        })
+        .attr("dy", function (d) {
+            return yScale(d.healthcare) +3
+        })
+        .attr("font-size", "10px");
 
     chartGroup.append("text")
         .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + chartMargin.top + 10})`)
@@ -83,4 +99,23 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .attr("fill", "black")
         .attr("font-size", "20px")
         .text("Lacks Healthcare (%)"); 
+
+//     var toolTip = d3.select("#scatter")
+//         .append("div")
+//         .classed("tooltip", true);
+
+
+//     circlesGroup.on("mouseover", function(d) {
+//         toolTip.style("display", "block")
+//             .html(
+//                 `<strong>${d.state}<strong><hr>${d.poverty}% In Poverty<hr>${d.healthcare}% Lacks Healthcare`)
+//             .style("left", d3.event.pageX + "px")
+//             .style("top", d3.event.pageY + "px");
+//   })
+
+//     .on("mouseout", function() {
+//         toolTip.style("display", "none");
+//   });
+
+
 });
