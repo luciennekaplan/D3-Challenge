@@ -1,2 +1,2 @@
 # D3 Visualization
-In this assignment, I built a scatter plot comparing the percentage of each states population that is in poverty vs. percentage of that same population lacking healthcare. Tooltips have been added so you can see the exact percentage values for each state when you hover over that states plot point.
+In this assignment I built a scatter plot using the D3 library. The selected data in the scatter plot compares the percentage of each states population that is in poverty vs. percentage of that same population lacking healthcare. This data was collected from the US Census Bureau. Tooltips have been added to the chart so you can see the exact percentage values for each state when you hover over that states plot point.
