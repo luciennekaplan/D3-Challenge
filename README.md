@@ -1,1 +1,2 @@
-# D3-Challenge
+# D3 Visualization
+In this assignment, I built a scatter plot comparing the percentage of each states population that is in poverty vs. percentage of that same population lacking healthcare. 
