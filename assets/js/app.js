@@ -5,8 +5,8 @@ var svgHeight = 600;
 //Define chart margins as an object
 var chartMargin = {
     top: 30,
-    right: 60,
-    bottom: 60,
+    right: 80,
+    bottom: 80,
     left: 60
 };
 
@@ -97,5 +97,4 @@ d3.csv("assets/data/data.csv").then(function (healthData) {
         .attr("fill", "white")
         .attr("font-size", "20px")
         .text("Lacks Healthcare (%)"); 
-
 });
